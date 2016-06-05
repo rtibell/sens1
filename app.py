@@ -38,13 +38,19 @@ def doit():
         print "{:10.4f}".format(x) + " {:10.4f}".format(y) + " {:10.4f}".format(z) + " {:10.4f}".format(len) + "  --  "
         old = acc
 	print avg()
+        dsp()
         time.sleep(0.1)
 
 def avg():
     arr = [None]*10
     for i in range(0,10):
-        arr[i] = root()
-    return np.average(arr, axis=1)
+        acc = root()
+        x = acc['x']
+        y = acc['y']
+        z = acc['z']
+        arr[i] = [x,y,z]
+    print arr
+    return np.average(arr)
 
 def init():
     global dsp_mtx
