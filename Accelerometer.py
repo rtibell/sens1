@@ -4,80 +4,69 @@ from math import pow, sqrt, floor
 import numpy as np
 import time
 import threading
+import multiprocessing as mp
 from sense_hat import SenseHat
 
+class Accelorometer(threading.Thread):
+    def __init__(self):
+        threading.Thread.__init__(self)
+        self.daemon = True
+        self.Sense = SenseHat()
+        self.Sense.set_imu_config(False, False, True)
+        self.Queue = mp.Queue()
 
-def doit():
-    old = root()
-    for i in range(0,64):
-        acc = root()
-        x = old['x'] - acc['x']
-        y = old['y'] - acc['y']
-        z = old['z'] - acc['z']
-        len = sqrt(pow(x,2) + pow(y,2) + pow(z,2))
-        abslen = int(floor(len*5))
-        if abslen > 9:
-            abslen = 9
-            print "*** Over Flow ***"
-        dsp_mtx[i] = cols[abslen]
-        print i
-        print "{:10.4f}".format(x) + " {:10.4f}".format(y) + " {:10.4f}".format(z) + " {:10.4f}".format(len) + "  --  "
-        old = acc
-	print avg()
-        dsp()
-        time.sleep(0.1)
+    def run(self):
+        print(threading.Thread.isAlive(self))
+        while (threading.Thread.isAlive(self)):
+            self.Queue.put(self.read_acc())
+#            self.report()
+#            time.sleep(0.1)
+            time.sleep(5)
 
-def avg():
-    arr = [None]*10
-    for i in range(0,10):
-        acc = root()
-        x = acc['x']
-        y = acc['y']
-        z = acc['z']
-        arr[i] = [x,y,z]
-    print arr
-    return np.average(arr)
+    def read_acc(self):
+        a1 = self.Sense.get_accelerometer_raw()
+        self.acc = a1
+        return a1
+
+    def get(self):
+        return [self.get_x(), self.get_y(), self.get_z()] 
+
+    def get_x(self):
+        return self.acc['x']
+
+    def get_y(self):
+        return self.acc['y']
+
+    def get_z(self):
+        return self.acc['z']
+
+    def get_len(self):
+        self.Length = sqrt(pow(self.get_x(),2) + pow(self.get_y(),2) + pow(self.get_z(),2))
+        return self.Length
+
+    def report(self):
+        print(self.get_x())
+        print(self.get_y())
+        print(self.get_z())
+        print(self.get())
+        print(self.get_len())
+
+    def read_queue(self):
+        yield self.Queue.get(block=True)
+
 
 def init():
-    global dsp_mtx
-    sense.set_imu_config(False, False, True)
-    global sense
-    tt = threading.Thread(target=doit)
-    tt.daemon = True
-    tt.start()
-    print "start sleeping..."
-    time.sleep(64)
-    
-def root():
-    acc_raw = sense.get_accelerometer_raw()
-    acc2 = "x: {x:10.4f}, y: {y:10.4f}, z: {z:10.4f}".format(**acc_raw)
-    return acc_raw
-
-def dsp():
-    sense.set_pixels(dsp_mtx)
-    
+    print('at init')
+    acc = Accelorometer()
+    print('at start')
+    acc.start()
+    for dat in acc.read_queue():
+        print dat
+    print('at sleep')
+    time.sleep(30)
 
 if __name__ == '__main__':
     init()
-#!/usr/bin/python
 
-from math import pow, sqrt, floor
-import numpy as np
-import time
-import threading
-from sense_hat import SenseHat
 
-class Account():
-    def transfer(self, target, amount):
-        pass
-    def __init__(self, holder, number, balance):
-        self.Holder = holder
-        self.Number = number
-        self.Balance = balance
-    
-def init():
-    a1 = Account('Rasmus', 123232, 200)
-    print(a1.Holder)
 
-if __name__ == '__main__':
-    init()
