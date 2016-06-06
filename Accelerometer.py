@@ -13,13 +13,13 @@ class Accelorometer(threading.Thread):
         self.daemon = True
         self.Sense = SenseHat()
         self.Sense.set_imu_config(False, False, True)
-        self.Queue = mp.Queue()
+        self.Queue = mp.Queue(1024)
 
     def run(self):
-        print(threading.Thread.isAlive(self))
         while (threading.Thread.isAlive(self)):
             self.Queue.put(self.read_acc())
-#            self.report()
+            self.report()
+            print(self.Queue.qsize())
 #            time.sleep(0.1)
             time.sleep(5)
 
@@ -52,7 +52,7 @@ class Accelorometer(threading.Thread):
         print(self.get_len())
 
     def read_queue(self):
-        yield self.Queue.get(block=True)
+        yield self.Queue.get(True, None)
 
 
 def init():
@@ -60,6 +60,10 @@ def init():
     acc = Accelorometer()
     print('at start')
     acc.start()
+    for dat in acc.read_queue():
+        print dat
+    print('at sleep')
+    time.sleep(15)
     for dat in acc.read_queue():
         print dat
     print('at sleep')
