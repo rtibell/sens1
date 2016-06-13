@@ -1,7 +1,7 @@
 
 import time
-import Accelerometer
-
+from Accelerometer import Accelerometer
+from Accelerometer import Accelerometer
 
 def init():
     print('at init')

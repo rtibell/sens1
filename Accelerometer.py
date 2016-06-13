@@ -21,6 +21,10 @@ class Accelerometer(Thread):
         while (self.dorun):
             self.que.put(self.read_acc())
             self.report()
+
+            print(self.que.qsize())
+            print(self.que.qsize())
+#            time.sleep(0.1)
             time.sleep(5)
 
     def read_acc(self):
@@ -60,6 +64,8 @@ class Accelerometer(Thread):
             except:
                 print("Exception")
 
+    def read_queue(self):
+        yield self.que.get(True, None)
 
 
 
