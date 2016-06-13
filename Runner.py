@@ -8,7 +8,7 @@ def init():
     acc.start()
 
     dsp = Display(acc)
-    dsp.start
+    dsp.start()
 
     print('at sleep')
     time.sleep(30)
