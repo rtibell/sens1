@@ -1,10 +1,7 @@
 
 import time
-from Accelerometer import Accelerometer
-<<<<<<< HEAD
-from Accelerometer import Accelerometer
-=======
->>>>>>> 14354425a03b730125a9e214a0b841abff0e41dc
+import Accelerometer
+
 
 def init():
     print('at init')
