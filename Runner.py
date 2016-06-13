@@ -1,11 +1,10 @@
 
 import time
-import Accelerometer
-
+from Accelerometer import Accelerometer
 
 def init():
     print('at init')
-    acc = Accelorometer()
+    acc = Accelerometer()
     print('at start')
     acc.start()
     for dat in acc.read_queue():

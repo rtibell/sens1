@@ -7,7 +7,7 @@ from sense_hat import SenseHat
 from threading import Thread
 from multiprocessing import Queue
 
-class Accelorometer(Thread):
+class Accelerometer(Thread):
     def __init__(self):
         Thread.__init__(self)
         self.daemon = True
@@ -19,9 +19,9 @@ class Accelorometer(Thread):
 
     def run(self):
         while (self.dorun):
-            self.Queue.put(self.read_acc())
+            self.que.put(self.read_acc())
             self.report()
-            print(self.Queue.qsize())
+            print(self.que.qsize())
 #            time.sleep(0.1)
             time.sleep(5)
 
@@ -54,7 +54,7 @@ class Accelorometer(Thread):
         print(self.get_len())
 
     def read_queue(self):
-        yield self.Queue.get(True, None)
+        yield self.que.get(True, None)
 
 
 
