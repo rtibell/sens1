@@ -21,8 +21,11 @@ class Accelerometer(Thread):
         while (self.dorun):
             self.que.put(self.read_acc())
             self.report()
+<<<<<<< HEAD
 
             print(self.que.qsize())
+=======
+>>>>>>> 14354425a03b730125a9e214a0b841abff0e41dc
             print(self.que.qsize())
 #            time.sleep(0.1)
             time.sleep(5)
