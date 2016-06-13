@@ -1,7 +1,7 @@
 
 import time
 from Accelerometer import Accelerometer
-import Display
+from Display import Display
 
 def init():
     print('at init')
