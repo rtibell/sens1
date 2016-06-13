@@ -5,7 +5,7 @@ import Accelerometer
 
 def init():
     print('at init')
-    acc = Accelorometer()
+    acc = Accelerometer()
     print('at start')
     acc.start()
 
