@@ -8,14 +8,22 @@ def init():
     acc = Accelorometer()
     print('at start')
     acc.start()
-    for dat in acc.read_queue():
-        print dat
-    print('at sleep')
-    time.sleep(15)
-    for dat in acc.read_queue():
-        print dat
+
+    dsp = Display(acc)
+    acc.start
+
     print('at sleep')
     time.sleep(30)
+    
+    acc.stopit()
+    acc.join()
+    print("Accelorometer stopped")
+    
+    dsp.stopit()
+    dsp.join()
+    print("Display stopped")
+    time.sleep(2)
+    print("End")
 
 if __name__ == '__main__':
     init()
