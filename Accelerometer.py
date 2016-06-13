@@ -7,7 +7,7 @@ from sense_hat import SenseHat
 from threading import Thread
 from multiprocessing import Queue
 
-class Accelorometer(Thread):
+class Accelerometer(Thread):
     def __init__(self):
         Thread.__init__(self)
         self.daemon = True
