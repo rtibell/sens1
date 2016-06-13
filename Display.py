@@ -2,7 +2,7 @@ from sense_hat import SenseHat
 from threading import Thread
 from multiprocessing import Queue
 
-class ConsClass(Thread):
+class Display(Thread):
     def __init__(self, prod):
         Thread.__init__(self)
         self.daemon = True
