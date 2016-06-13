@@ -3,20 +3,22 @@
 from math import pow, sqrt, floor
 import numpy as np
 import time
-import threading
-import multiprocessing as mp
 from sense_hat import SenseHat
+from threading import Thread
+from multiprocessing import Queue
 
-class Accelorometer(threading.Thread):
+class Accelorometer(Thread):
     def __init__(self):
-        threading.Thread.__init__(self)
+        Thread.__init__(self)
         self.daemon = True
         self.Sense = SenseHat()
         self.Sense.set_imu_config(False, False, True)
-        self.Queue = mp.Queue(1024)
+        self.cnt = 0
+        self.que = Queue(1024)
+        self.dorun = True
 
     def run(self):
-        while (threading.Thread.isAlive(self)):
+        while (self.dorun):
             self.Queue.put(self.read_acc())
             self.report()
             print(self.Queue.qsize())
@@ -55,22 +57,6 @@ class Accelorometer(threading.Thread):
         yield self.Queue.get(True, None)
 
 
-def init():
-    print('at init')
-    acc = Accelorometer()
-    print('at start')
-    acc.start()
-    for dat in acc.read_queue():
-        print dat
-    print('at sleep')
-    time.sleep(15)
-    for dat in acc.read_queue():
-        print dat
-    print('at sleep')
-    time.sleep(30)
-
-if __name__ == '__main__':
-    init()
 
 
 
