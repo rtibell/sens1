@@ -4,13 +4,11 @@ from Accelerometer import Accelerometer
 from Display import Display
 
 def init():
-    print('at init')
     acc = Accelerometer()
-    print('at start')
     acc.start()
 
     dsp = Display(acc)
-    acc.start
+    dsp.start
 
     print('at sleep')
     time.sleep(30)
