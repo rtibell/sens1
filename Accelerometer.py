@@ -16,8 +16,8 @@ class Accelerometer(Thread):
         self.Sense.set_imu_config(False, False, True)
         self.cnt = 0
         self.quantum = quantum
-        self.period = 50
-        self.iters = self.quantum / self.period
+        self.period = 0.01
+        self.iters = int(self.quantum / self.period)
         self.que = Queue(1024)
         self.dorun = True
 
@@ -36,9 +36,10 @@ class Accelerometer(Thread):
                 if (min > av):
                     min = av
                 i = i - 1
+                time.sleep
             dic = {'avg': (sum/float(self.iters)), 'min': min, 'max': max}
             self.que.put(dic)
-            time.sleep(self.quantum)
+            time.sleep(self.period)
 
     def read_acc(self):
         a1 = self.Sense.get_accelerometer_raw()
