@@ -8,19 +8,20 @@ from threading import Thread
 from multiprocessing import Queue
 
 class Accelerometer(Thread):
-    def __init__(self):
+    def __init__(self, quantum):
         Thread.__init__(self)
         self.daemon = True
         self.Sense = SenseHat()
         self.Sense.set_imu_config(False, False, True)
         self.cnt = 0
+        self.quantum = quantum
         self.que = Queue(1024)
         self.dorun = True
 
     def run(self):
         while (self.dorun):
             self.que.put(self.read_acc())
-            time.sleep(5)
+            time.sleep(self.quantum)
 
     def read_acc(self):
         a1 = self.Sense.get_accelerometer_raw()
