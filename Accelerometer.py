@@ -28,6 +28,7 @@ class Accelerometer(Thread):
             min = 1000000000.0
             sum = 0.0
             while (i > 0):
+                self.read_acc()
                 acc = self.get_len()
                 sum = sum + acc
                 if (max < acc):
