@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-from math import pow, sqrt, floor, abs
+from math import pow, sqrt, floor
 import sys
 import numpy as np
 import time
