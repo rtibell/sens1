@@ -24,8 +24,8 @@ class Accelerometer(Thread):
     def run(self):
         while (self.dorun):
             i = self.iters
-            max = sys.minint
-            min = sys.maxint
+            max = -1.0
+            min = 1000000000.0
             sum = 0
             while (i > 0):
                 acc = self.read_acc()
