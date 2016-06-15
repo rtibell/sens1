@@ -1,7 +1,6 @@
 #!/usr/bin/python
 
 from math import pow, sqrt, floor
-from sys import maxint, minint
 import numpy as np
 import time
 from sense_hat import SenseHat
