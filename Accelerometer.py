@@ -15,11 +15,17 @@ class Accelerometer(Thread):
         self.Sense.set_imu_config(False, False, True)
         self.cnt = 0
         self.quantum = quantum
+        self.period = 50
+        self.iters = self.quantum / self.period
         self.que = Queue(1024)
         self.dorun = True
 
     def run(self):
         while (self.dorun):
+            i = self.iters
+            max = sys.minint
+            while (i > 0):
+                acc = self.read_acc()
             self.que.put(self.read_acc())
             time.sleep(self.quantum)
 

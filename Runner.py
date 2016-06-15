@@ -4,7 +4,7 @@ from Accelerometer import Accelerometer
 from Display import Display
 
 def init():
-    acc = Accelerometer(0.500)
+    acc = Accelerometer(0.250)
     acc.start()
 
     dsp = Display(acc)
