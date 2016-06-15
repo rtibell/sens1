@@ -1,6 +1,7 @@
 #!/usr/bin/python
 
 from math import pow, sqrt, floor
+import sys
 import numpy as np
 import time
 from sense_hat import SenseHat
@@ -23,8 +24,8 @@ class Accelerometer(Thread):
     def run(self):
         while (self.dorun):
             i = self.iters
-            max = Integer.MIN_VALUE
-            min = Integer.MAX_VALUE
+            max = sys.minint
+            min = sys.maxint
             sum = 0
             while (i > 0):
                 acc = self.read_acc()
