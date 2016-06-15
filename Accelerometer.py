@@ -24,17 +24,19 @@ class Accelerometer(Thread):
     def run(self):
         while (self.dorun):
             i = self.iters
-            max = -1.0
+            max = -1000000000.0
             min = 1000000000.0
             sum = 0.0
             while (i > 0):
                 acc = self.read_acc()
+                print(acc)
+                print(sum)
                 sum = sum + acc
                 if (max < acc):
                     max = acc
                 if (min > acc):
                     min = acc
-                i = i + 1
+                i = i - 1
             dic = {'avg': (sum/float(self.iters)), 'min': min, 'max': max}
             self.que.put(dic)
             time.sleep(self.quantum)
