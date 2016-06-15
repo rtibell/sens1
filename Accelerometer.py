@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-from math import pow, sqrt, floor
+from math import pow, sqrt, floor, abs
 import sys
 import numpy as np
 import time
@@ -27,18 +27,27 @@ class Accelerometer(Thread):
             max = -1000000000.0
             min = 1000000000.0
             sum = 0.0
+            acc_first = self.read_acc()
             while (i > 0):
-                self.read_acc()
+                rd = self.read_acc()
                 av = self.get_len()
                 sum = sum + av
                 if (max < av):
                     max = av
+                    acc_max = rd
+                    acc_max_i = (self.iters - i)
                 if (min > av):
                     min = av
+                    acc_min = rd 
+                    acc_min_i = (self.iters - i)
                 i = i - 1
                 time.sleep
-            dic = {'avg': (sum/float(self.iters)), 'min': min, 'max': max}
-            self.que.put(dic)
+            acc_last = self.read_acc()
+            ruck_avg = sqrt(pow(acc_first['x']-acc_last['x'], 2)+pow(acc_first['y']-acc_last['y'], 2)+pow(acc_first['z']-acc_last['z'], 2))/self.quantum
+            ruck_max = sqrt(pow(acc_max['x']-acc_min['x'], 2)+pow(acc_max['y']-acc_min['y'], 2)+pow(acc_max['z']-acc_min['z'], 2))/abs(acc_min_i-acc_max_i)
+            acc_dic = {'avg': (sum/float(self.iters)), 'min': min, 'max': max}
+            ruck_dic = {'avg': ruck_avg, 'max': ruck_max}
+            self.que.put([acc_dic, ruck_dic])
             time.sleep(self.period)
 
     def read_acc(self):
