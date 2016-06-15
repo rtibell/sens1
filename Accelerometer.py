@@ -29,12 +29,12 @@ class Accelerometer(Thread):
             sum = 0.0
             while (i > 0):
                 self.read_acc()
-                acc = self.get_len()
-                sum = sum + acc
-                if (max < acc):
-                    max = acc
-                if (min > acc):
-                    min = acc
+                av = self.get_len()
+                sum = sum + av
+                if (max < av):
+                    max = av
+                if (min > av):
+                    min = av
                 i = i - 1
             dic = {'avg': (sum/float(self.iters)), 'min': min, 'max': max}
             self.que.put(dic)
