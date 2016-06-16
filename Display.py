@@ -31,7 +31,7 @@ class Display(Thread):
         self.Sense.set_pixels(self.DSPbuff)
         
     def shiftL(self):
-        for c in range(1,8):
+        for c in range(0,7):
             for r in range(0,8):
                 print("r={} c={}".format(r,c))
                 self.DSPbuff[c+8*r] = self.DSPbuff[(c+1)+8*r]
