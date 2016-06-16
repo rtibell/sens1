@@ -42,6 +42,7 @@ class Display(Thread):
         while (self.dorun):
             print('{} {}'.format('Cons', self.prod.getNext()))
             self.shiftL()
+            self.dsp()
         print("Stopping Cons")
         
     def stopit(self):
