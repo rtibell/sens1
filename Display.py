@@ -32,7 +32,7 @@ class Display(Thread):
         
     def run(self):
         print("Running Cons")
-        dsp()
+        self.dsp()
         while (self.dorun):
             print('{} {}'.format('Cons', self.prod.getNext()))
         print("Stopping Cons")
