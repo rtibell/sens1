@@ -30,11 +30,17 @@ class Display(Thread):
     def dsp(self):
         self.Sense.set_pixels(self.DSPbuff)
         
+    def shiftL(self):
+        for c in range(1,8):
+            for r in range(0,8):
+                self.DSPbuff[c+8*r] = self.DSPbuff[(c+1)+8*r]
+        
     def run(self):
         print("Running Cons")
         self.dsp()
         while (self.dorun):
             print('{} {}'.format('Cons', self.prod.getNext()))
+            self.shiftL()
         print("Stopping Cons")
         
     def stopit(self):
