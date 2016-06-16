@@ -16,7 +16,7 @@ class Display(Thread):
         self.dorun = True
         self.Sense = SenseHat()
         self.Sense.clear()
-        Self.DSPbuff = [
+        self.DSPbuff = [
                         RED, BLK, BLK, BLK, BLK, BLK, BLK, BLK,
                         BLK, BLK, BLK, BLK, BLK, BLK, BLK, BLK,
                         BLK, BLK, BLK, BLK, BLK, BLK, BLK, BLK,
