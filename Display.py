@@ -48,6 +48,7 @@ class Display(Thread):
         print("a={} r={}".format(acc_value, ruck_value))
         c = 7
         for r in range(7-acc_value,8):
+            print("c={} r={}".format(c,r))
             self.DSPbuff[c+8*r] = self.color_scale[ruck_value]
         
     def shiftL(self):
