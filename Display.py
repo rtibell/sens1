@@ -64,7 +64,10 @@ class Display(Thread):
         print("Running Cons")
         self.dsp()
         while (self.dorun):
-            print('{} {}'.format('Cons', self.prod.getNext()))
+            next = self.prod.getNext()
+            print('{} {}'.format('Cons', next))
+            acc_max = next[0]{'max'}
+            ruck = next[1]{'max'}
             self.shiftL()
             self.dsp()
         print("Stopping Cons")
