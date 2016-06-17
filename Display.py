@@ -28,7 +28,7 @@ class Display(Thread):
         self.Sense = SenseHat()
         self.Sense.clear()
         self.DSPbuff = INIT_DSP
-        self.color_scale = colorScale(RUCK_SCALE)
+        self.color_scale = self.colorScale(RUCK_SCALE)
         self.Sense.low_light = True
     
     def colorScale(self, size):
