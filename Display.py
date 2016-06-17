@@ -34,7 +34,7 @@ class Display(Thread):
     def colorScale(self, size):
         buff = [None] * 64
         for i in range(0, size):
-            buff[i] = [(255*i)/size, (255*(size-i))/size]
+            buff[i] = [(255*i)/size, (255*(size-i))/size, 0]
         return buff
     
     def dsp(self):
