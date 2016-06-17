@@ -44,7 +44,7 @@ class Display(Thread):
         return value
     
     def scaleRuck(self, value):
-        return value/2
+        return value*64/(128+256)
     
     def setValue(self, acc_value, ruck_value):
         """ setValue in last column of the display. Acceleration as bar hight and ruck as colors.
