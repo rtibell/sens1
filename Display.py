@@ -45,6 +45,7 @@ class Display(Thread):
                 acc_value - Acceleration number between 0 and 7
                 ruck_value - Ruck value between 0 and 63
         """
+        print("a={} r={}".format(acc_value, ruck_value))
         c = 7
         for r in range(7-acc_value,8):
             self.DSPbuff[c+8*r] = self.color_scale[ruck_value]
