@@ -40,6 +40,12 @@ class Display(Thread):
     def dsp(self):
         self.Sense.set_pixels(self.DSPbuff)
         
+    def scaleAcc(self, value):
+        return value
+    
+    def scaleRuck(self, value):
+        return value/2
+    
     def setValue(self, acc_value, ruck_value):
         """ setValue in last column of the display. Acceleration as bar hight and ruck as colors.
                 acc_value - Acceleration number between 0 and 7
@@ -48,8 +54,8 @@ class Display(Thread):
         print("a={} r={}".format(acc_value, ruck_value))
         c = 7
         for r in range(7-acc_value,8):
-            print("c={} r={}".format(c,r))
-            print( self.color_scale[ruck_value])
+            #print("c={} r={}".format(c,r))
+            #print( self.color_scale[ruck_value])
             self.DSPbuff[c+8*r] = self.color_scale[ruck_value]
         
     def shiftL(self):
@@ -71,7 +77,7 @@ class Display(Thread):
             print('{} {}'.format('Cons', next))
             acc_max = next[0]['max']
             ruck = next[1]['max']
-            self.setValue(int(acc_max), int(ruck))
+            self.setValue(int(self.scaleAcc(acc_max)), int(self.scaleRuck(ruck)))
             self.shiftL()
             self.dsp()
         print("Stopping Cons")
