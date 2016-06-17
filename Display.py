@@ -68,6 +68,7 @@ class Display(Thread):
             print('{} {}'.format('Cons', next))
             acc_max = next[0]['max']
             ruck = next[1]['max']
+            self.setValue(acc_max, ruck)
             self.shiftL()
             self.dsp()
         print("Stopping Cons")
