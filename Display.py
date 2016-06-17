@@ -32,7 +32,7 @@ class Display(Thread):
         self.Sense.low_light = True
     
     def colorScale(self, size):
-        buff = []
+        buff = [64]
         for i in range(0, size):
             buff[i] = [(255*i)/size, (255*(size-i))/size]
         return buff
