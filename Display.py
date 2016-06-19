@@ -61,7 +61,7 @@ class Display(Thread):
         if (acc_value == 0 & ruck_value == 0):
             return
         c = 7
-        for r in range(7-acc_value-1,8):
+        for r in range(7-acc_value+1,8):
             #print("c={} r={}".format(c,r))
             #print( self.color_scale[ruck_value])
             self.DSPbuff[c+8*r] = self.color_scale[ruck_value]
