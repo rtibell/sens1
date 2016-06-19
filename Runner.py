@@ -8,7 +8,7 @@ def init():
     acc = Accelerometer(0.250)
     acc.start()
 
-    log = FileController(30)
+    log = FileController(20)
     log.start()
 
     dsp = Display(acc, log)

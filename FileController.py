@@ -22,7 +22,7 @@ class FileController(Thread):
                     f.closed
 
     def writeFile(self, file, entry):
-        file.write('{} {}'.format(dt.datetime.now(), entry))
+        file.write('{} {}\n'.format(dt.datetime.now(), entry))
 
     def stopit(self):
         self.dorun = False
