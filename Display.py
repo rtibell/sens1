@@ -93,7 +93,7 @@ class Display(Thread):
                  self.dorun = False
             else:
                 if (next[0]['avg'] > 0.982):
-                    rpt(next)
+                    self.rpt(next)
                 acc_max = next[0]['max']
                 ruck = next[1]['max']
                 self.shiftL()

@@ -17,7 +17,7 @@ class FileController(Thread):
             time.sleep(self.period)
             with open('logfile.txt', 'a') as f:
                 while (self.que.empty() == False):
-                    entry = getNext()
+                    entry = self.getNext()
                     writeFile(f, entry)
                     f.closed
 
