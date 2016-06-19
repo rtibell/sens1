@@ -15,15 +15,14 @@ E = [0, 0, 0]  # Black
 
 WHI = [255, 255, 255]  # White
 INIT_DSP = [
-            E,E,E,E,E,E,E,E,
-            E,E,E,R,R,E,E,E,
-            E,R,R,O,O,R,R,E,
-            R,O,O,Y,Y,O,O,R,
-            O,Y,Y,G,G,Y,Y,O,
-            Y,G,G,B,B,G,G,Y,
-            B,B,B,I,I,B,B,B,
-            B,I,I,V,V,I,I,B
-                        ]
+            E,E,E,Y,Y,E,E,E,
+            E,E,Y,G,G,Y,E,E,
+            E,Y,G,O,O,G,Y,E,
+            Y,G,O,V,V,O,G,Y,
+            Y,G,O,V,V,O,G,Y,
+            E,Y,G,O,O,G,Y,E,
+            E,E,Y,G,G,Y,E,E,
+            E,E,E,Y,Y,E,E,E]
 
 class Display(Thread):
     def __init__(self, prod):
@@ -63,7 +62,7 @@ class Display(Thread):
                 acc_value - Acceleration number between 0 and 7
                 ruck_value - Ruck value between 0 and 63
         """
-        print("a={} r={}".format(acc_value, ruck_value))
+        #print("a={} r={}".format(acc_value, ruck_value))
         if (acc_value == 0 & ruck_value == 0):
             return
         c = 7
