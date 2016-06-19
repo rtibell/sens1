@@ -92,14 +92,15 @@ class Display(Thread):
             if (next == None):
                  self.dorun = False
             else:
-                if (next[1]['avg'] > 0.982):
+                if (next[1]['avg'] > 0.975):
                     self.rpt(next)
+                    self.log.putNext(next)
                 acc_max = next[1]['max']
                 ruck = next[2]['max']
                 self.shiftL()
                 self.setValue(int(self.scaleAcc(acc_max)), int(self.scaleRuck(ruck)))
                 self.dsp()
-                self.log.putNext(next)
+                
         
     def rpt(self, next):
         print('{} {}'.format(dt.datetime.now(), next))
