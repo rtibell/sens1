@@ -58,6 +58,8 @@ class Display(Thread):
                 ruck_value - Ruck value between 0 and 63
         """
         print("a={} r={}".format(acc_value, ruck_value))
+        if (acc_value == 0 & ruck_value == 0):
+            return
         c = 7
         for r in range(7-acc_value,8):
             #print("c={} r={}".format(c,r))
