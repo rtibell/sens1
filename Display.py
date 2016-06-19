@@ -53,7 +53,7 @@ class Display(Thread):
         return v
     
     def scaleRuck(self, value):
-        v = value*64/(256)
+        v = value*64/(128)
         if (v > 63):
             v = 63
         return v
