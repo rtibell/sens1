@@ -56,7 +56,7 @@ class Display(Thread):
         for r in range(7-acc_value,8):
             #print("c={} r={}".format(c,r))
             #print( self.color_scale[ruck_value])
-            self.DSPbuff[c+8*r] = self.color_scale[ruck_value]
+            self.DSPbuff[c+8*r] = self.color_scale[ruck_value*2]
         
     def shiftL(self):
         for c in range(0,7):
@@ -77,8 +77,8 @@ class Display(Thread):
             print('{} {}'.format('Cons', next))
             acc_max = next[0]['max']
             ruck = next[1]['max']
-            self.setValue(int(self.scaleAcc(acc_max)), int(self.scaleRuck(ruck)))
             self.shiftL()
+            self.setValue(int(self.scaleAcc(acc_max)), int(self.scaleRuck(ruck)))
             self.dsp()
         print("Stopping Cons")
         
