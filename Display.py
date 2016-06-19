@@ -47,10 +47,16 @@ class Display(Thread):
         self.Sense.set_pixels(self.DSPbuff)
         
     def scaleAcc(self, value):
-        return value
+        v = value
+        if (value > 8):
+            v = 8
+        return v
     
     def scaleRuck(self, value):
-        return value*64/(256)
+        v = value*64/(256)
+        if (v > 63):
+            v = 63
+        return v
     
     def setValue(self, acc_value, ruck_value):
         """ setValue in last column of the display. Acceleration as bar hight and ruck as colors.
