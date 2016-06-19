@@ -73,7 +73,7 @@ class Display(Thread):
                 
     def clrColumn(self, c):
         for r in range(0,8):
-            self.DSPbuff[c+8*r] = BLK
+            self.DSPbuff[c+8*r] = E
         
     def run(self):
         print("Running Cons")
