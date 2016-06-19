@@ -1,6 +1,8 @@
 from sense_hat import SenseHat
 from threading import Thread
 from multiprocessing import Queue
+import datetime as dt
+
 ACC_SCALE = 8
 RUCK_SCALE = 64
 
@@ -90,7 +92,7 @@ class Display(Thread):
             if (next == None):
                  self.dorun = False
             else:
-                print('{} {}'.format('Cons', next))
+                print('{} {}'.format(dt.datetime.now(), next))
                 acc_max = next[0]['max']
                 ruck = next[1]['max']
                 self.shiftL()
