@@ -27,10 +27,11 @@ INIT_DSP = [
             E,E,E,Y,Y,E,E,E]
 
 class Display(Thread):
-    def __init__(self, prod):
+    def __init__(self, prod, log):
         Thread.__init__(self)
         self.daemon = True
         self.prod = prod
+        self.log = log
         self.dorun = True
         self.Sense = SenseHat()
         self.Sense.clear()
@@ -85,20 +86,23 @@ class Display(Thread):
             self.DSPbuff[c+8*r] = E
         
     def run(self):
-        print("Running Cons")
         self.dsp()
         while (self.dorun):
             next = self.prod.getNext()
             if (next == None):
                  self.dorun = False
             else:
-                print('{} {}'.format(dt.datetime.now(), next))
+                if (next[0]['avg'] > 0.982):
+                    rpt(next)
                 acc_max = next[0]['max']
                 ruck = next[1]['max']
                 self.shiftL()
                 self.setValue(int(self.scaleAcc(acc_max)), int(self.scaleRuck(ruck)))
                 self.dsp()
-        print("Stopping Cons")
+                self.log.putNext(next)
+        
+    def rpt(self, next):
+        print('{} {}'.format(dt.datetime.now(), next))
         
     def stopit(self):
         self.dorun = False
