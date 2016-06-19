@@ -3,20 +3,26 @@ from threading import Thread
 from multiprocessing import Queue
 ACC_SCALE = 8
 RUCK_SCALE = 64
-BLK = [0, 0, 0]  # Black
-RED = [255, 0, 0]  # Red
-GRE = [0, 255, 0]   # Green
-BLU = [0, 0, 255]   # Blue
+
+R = [255, 0, 0]  # Red
+O = [255, 127, 0] # Orange
+Y = [255, 255, 0] # Yellow
+G = [0, 255, 0]   # Green
+B = [0, 0, 255]   # Blue
+I = [75, 0, 130]
+V = [159, 0, 255]
+E = [0, 0, 0]  # Black
+
 WHI = [255, 255, 255]  # White
 INIT_DSP = [
-                        RED, BLK, BLK, BLK, BLK, BLK, BLK, BLK,
-                        BLK, BLK, BLK, BLK, BLK, BLK, BLK, BLK,
-                        BLK, BLK, BLK, BLK, BLK, BLK, BLK, BLK,
-                        BLK, BLK, BLK, BLK, BLK, BLK, BLK, BLK,
-                        BLK, BLK, BLK, BLK, BLK, BLK, BLK, BLK,
-                        BLK, BLK, BLK, BLK, BLK, BLK, BLK, BLK,
-                        BLK, BLK, BLK, BLK, BLK, BLK, BLK, BLK,
-                        BLK, BLK, BLK, BLK, BLK, BLK, BLK, WHI
+            E,E,E,E,E,E,E,E,
+            E,E,E,R,R,E,E,E,
+            E,R,R,O,O,R,R,E,
+            R,O,O,Y,Y,O,O,R,
+            O,Y,Y,G,G,Y,Y,O,
+            Y,G,G,B,B,G,G,Y,
+            B,B,B,I,I,B,B,B,
+            B,I,I,V,V,I,I,B
                         ]
 
 class Display(Thread):
