@@ -44,7 +44,7 @@ class Display(Thread):
         return value
     
     def scaleRuck(self, value):
-        return value*64/(128+256)
+        return value*64/(256)
     
     def setValue(self, acc_value, ruck_value):
         """ setValue in last column of the display. Acceleration as bar hight and ruck as colors.
@@ -56,7 +56,7 @@ class Display(Thread):
         for r in range(7-acc_value,8):
             #print("c={} r={}".format(c,r))
             #print( self.color_scale[ruck_value])
-            self.DSPbuff[c+8*r] = self.color_scale[ruck_value*2]
+            self.DSPbuff[c+8*r] = self.color_scale[ruck_value]
         
     def shiftL(self):
         for c in range(0,7):
