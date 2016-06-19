@@ -1,6 +1,7 @@
 from threading import Thread
 from multiprocessing import Queue
 import datetime as dt
+import time
 
 class FileController(Thread):
     def __init__(self, period):
