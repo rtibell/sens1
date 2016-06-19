@@ -15,7 +15,8 @@ class FileController(Thread):
     def run(self):
         while (self.dorun):
             time.sleep(self.period)
-            with open('logfile.txt', 'a') as f:
+            tm = dt.datetime.now().strftime('%Y%m%d_%H.log')
+            with open(tm, 'a') as f:
                 while (self.que.empty() == False):
                     entry = self.getNext()
                     self.writeFile(f, entry)

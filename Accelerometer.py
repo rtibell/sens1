@@ -48,7 +48,8 @@ class Accelerometer(Thread):
             ruck_max = sqrt(pow(acc_max['x']-acc_min['x'], 2)+pow(acc_max['y']-acc_min['y'], 2)+pow(acc_max['z']-acc_min['z'], 2))/(abs(acc_min_i-acc_max_i)*self.period)
             acc_dic = {'avg': (sum/float(self.iters)), 'min': min, 'max': max}
             ruck_dic = {'avg': ruck_avg, 'max': ruck_max}
-            self.que.put([dt.datetime.now(), acc_dic, ruck_dic])
+            self.que.put([dt.datetime.now().strftime('%Y%m%d %H:%M.%S.%f'), 
+                          acc_dic, ruck_dic])
             time.sleep(self.period)
 
     def read_acc(self):
