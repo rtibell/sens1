@@ -2,6 +2,7 @@
 import time
 from Accelerometer import Accelerometer
 from Display import Display
+from FileController import FileController
 
 def init():
     acc = Accelerometer(0.250)
