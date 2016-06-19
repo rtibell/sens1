@@ -74,12 +74,15 @@ class Display(Thread):
         self.dsp()
         while (self.dorun):
             next = self.prod.getNext()
-            print('{} {}'.format('Cons', next))
-            acc_max = next[0]['max']
-            ruck = next[1]['max']
-            self.shiftL()
-            self.setValue(int(self.scaleAcc(acc_max)), int(self.scaleRuck(ruck)))
-            self.dsp()
+            if (next == None):
+                 self.dorun = False
+            else:
+                print('{} {}'.format('Cons', next))
+                acc_max = next[0]['max']
+                ruck = next[1]['max']
+                self.shiftL()
+                self.setValue(int(self.scaleAcc(acc_max)), int(self.scaleRuck(ruck)))
+                self.dsp()
         print("Stopping Cons")
         
     def stopit(self):
