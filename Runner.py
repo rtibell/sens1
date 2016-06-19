@@ -7,14 +7,11 @@ def init():
     acc = Accelerometer(0.250)
     acc.start()
 
-    log.stopit()
-    log.join()
+    log = FileController(30)
+    log.start()
 
     dsp = Display(acc, log)
     dsp.start()
-
-    log = FileController(30)
-    log.start()
     
     print('at sleep')
     time.sleep(120)
@@ -26,6 +23,12 @@ def init():
     dsp.stopit()
     dsp.join()
     print("Display stopped")
+
+        
+    log.stopit()
+    log.join()
+    print("FileController stopped")
+
     time.sleep(2)
     print("End")
 
