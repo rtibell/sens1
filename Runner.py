@@ -15,7 +15,7 @@ def init():
     dsp.start()
     
     print('at sleep')
-    time.sleep(120)
+    time.sleep(60*60)
     
     acc.stopit()
     acc.join()

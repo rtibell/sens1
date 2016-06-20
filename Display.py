@@ -52,13 +52,13 @@ class Display(Thread):
         v = value
         if (value > 8):
             v = 8
-        return v
+        return max(0, min(v, 8))
     
     def scaleRuck(self, value):
-        v = value*64/(128)
+        v = value*64/(96)
         if (v > 63):
             v = 63
-        return v
+        return max(0, min(v, 63))
     
     def setValue(self, acc_value, ruck_value):
         """ setValue in last column of the display. Acceleration as bar hight and ruck as colors.
