@@ -53,7 +53,7 @@ class Display(Thread):
         return max(0, min(v, 8))
     
     def scaleRuck(self, value):
-        v = value*64/(96)
+        v = value*64/(32)
         if (v > 63):
             v = 63
         return max(0, min(v, 63))
