@@ -21,6 +21,7 @@ class Accelerometer(Thread):
         self.iters = int(self.quantum / self.period)
         self.que = Queue(1024)
         self.dorun = True
+        self.acc_offset = 0
 
     def run(self):
         while (self.dorun):
@@ -52,6 +53,15 @@ class Accelerometer(Thread):
                           acc_dic, ruck_dic])
             time.sleep(self.period)
 
+    def adjust(self):
+        ac = 0.0
+        for i in range(0,100):
+            rd = self.read_acc()
+            av = self.get_len()
+            ac += av
+        self.acc_offset = ac/100.0
+        self.acc_offset *= 1.02
+        
     def read_acc(self):
         a1 = self.Sense.get_accelerometer_raw()
         self.acc = a1
@@ -72,6 +82,9 @@ class Accelerometer(Thread):
     def get_len(self):
         self.Length = sqrt(pow(self.get_x(),2) + pow(self.get_y(),2) + pow(self.get_z(),2))
         return self.Length
+
+    def get_adj_len(self):
+        return self.get_len()-self.acc_offset
 
     def report(self):
         print(self.get_x())

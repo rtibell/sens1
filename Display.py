@@ -49,9 +49,7 @@ class Display(Thread):
         self.Sense.set_pixels(self.DSPbuff)
         
     def scaleAcc(self, value):
-        v = value*4
-        if (value > 8):
-            v = 8
+        v = value*8/0.5
         return max(0, min(v, 8))
     
     def scaleRuck(self, value):
@@ -92,7 +90,7 @@ class Display(Thread):
             if (next == None):
                  self.dorun = False
             else:
-                if (next[1]['avg'] > 0.98):
+                if (next[1]['avg'] > 0.0):
                     self.rpt(next)
                     self.log.putNext(next)
                 acc_max = next[1]['max']
