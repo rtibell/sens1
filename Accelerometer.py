@@ -24,6 +24,7 @@ class Accelerometer(Thread):
         self.acc_offset = 0
 
     def run(self):
+        self.adjust()
         while (self.dorun):
             i = self.iters
             max = -1000000000.0
