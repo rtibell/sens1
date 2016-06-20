@@ -32,7 +32,7 @@ class Accelerometer(Thread):
             acc_first = self.read_acc()
             while (i > 0):
                 rd = self.read_acc()
-                av = self.get_len()
+                av = self.get_adj_len()
                 sum = sum + av
                 if (max < av):
                     max = av
@@ -61,7 +61,7 @@ class Accelerometer(Thread):
             ac += av
         self.acc_offset = ac/100.0
         self.acc_offset *= 1.02
-        
+
     def read_acc(self):
         a1 = self.Sense.get_accelerometer_raw()
         self.acc = a1
