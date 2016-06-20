@@ -92,7 +92,7 @@ class Display(Thread):
             if (next == None):
                  self.dorun = False
             else:
-                if (next[1]['avg'] > 0.975):
+                if (next[1]['avg'] > 0.98):
                     self.rpt(next)
                     self.log.putNext(next)
                 acc_max = next[1]['max']
