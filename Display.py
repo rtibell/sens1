@@ -49,7 +49,7 @@ class Display(Thread):
         self.Sense.set_pixels(self.DSPbuff)
         
     def scaleAcc(self, value):
-        v = value
+        v = value*4
         if (value > 8):
             v = 8
         return max(0, min(v, 8))
