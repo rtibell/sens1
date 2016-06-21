@@ -53,7 +53,7 @@ class Accelerometer(Thread):
             acc_dic = {'avg': (sum/float(self.iters)), 'min': min, 'max': max}
             ruck_dic = {'avg': ruck_avg, 'max': ruck_max}
             self.que.put([dt.datetime.now().strftime('%Y%m%d %H:%M.%S.%f'), 
-                          acc_dic, ruck_dic])
+                          acc_dic, ruck_dic, acc_first, acc_last])
             time.sleep(self.period)
 
     def adjust(self):
