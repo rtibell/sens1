@@ -13,7 +13,6 @@ class BinaryFileController(Thread):
         self.dorun = True
 
     def run(self):
-        print("BinaryFileController running...")
         while (self.dorun):
             time.sleep(self.period)
             tm = dt.datetime.now().strftime('%Y%m%d_%H.bin')

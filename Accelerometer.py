@@ -58,7 +58,6 @@ class Accelerometer(Thread):
             time.sleep(self.period)
 
     def writeBinLog(self, entry):
-        print(self.bin_logger)
         if (self.bin_logger == None):
             return
         else:
