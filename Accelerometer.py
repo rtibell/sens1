@@ -61,7 +61,7 @@ class Accelerometer(Thread):
         if (self.bin_logger == None):
             return
         else:
-            self.bin_logger.putNext(entry)
+            self.bin_logger.putNext([dt.datetime.now().strftime('%Y%m%d %H:%M.%S.%f'), entry])
 
     def adjust(self):
         ac = 0.0

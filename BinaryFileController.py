@@ -23,7 +23,7 @@ class BinaryFileController(Thread):
                     f.closed
 
     def writeFile(self, file, entry):
-        file.write("{}\t{}\t{}\n".format(entry['x'], entry['y'], entry['z']))
+        file.write("{}\t{}\t{}\t{}\n".format(entry[0], entry[1]['x'], entry[1]['y'], entry[1]['z']))
 
     def stopit(self):
         self.dorun = False
