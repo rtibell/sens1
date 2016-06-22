@@ -5,7 +5,11 @@ from Display import Display
 from FileController import FileController
 
 def init():
-    acc = Accelerometer(0.250, None)
+
+    bin = BinaryFileController(0.250)
+    bin.start()
+
+    acc = Accelerometer(0.250, bin)
     acc.start()
 
     log = FileController(20)
@@ -25,7 +29,10 @@ def init():
     dsp.join()
     print("Display stopped")
 
-        
+    bin.stopit()
+    bin.join()
+    print("BinLogger stopped")
+       
     log.stopit()
     log.join()
     print("FileController stopped")
