@@ -17,16 +17,14 @@ class BinaryFileController(Thread):
         while (self.dorun):
             time.sleep(self.period)
             tm = dt.datetime.now().strftime('%Y%m%d_%H.bin')
-            with open(tm, 'ab') as f:
+            with open(tm, 'a') as f:
                 while (self.que.empty() == False):
                     entry = self.getNext()
                     self.writeFile(f, entry)
                     f.closed
 
     def writeFile(self, file, entry):
-        file.write(entry['x'])
-        file.write(entry['y'])
-        file.write(entry['z'])
+        file.write("{}\t{}\t{}\n".format(entry['x'], entry['y'], entry['z'])
 
     def stopit(self):
         self.dorun = False
