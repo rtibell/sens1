@@ -10,7 +10,7 @@ from threading import Thread
 from multiprocessing import Queue
 
 class Accelerometer(Thread):
-    def __init__(self, quantum, bin_log):
+    def __init__(self, quantum, bin_logger):
         Thread.__init__(self)
         self.daemon = True
         self.Sense = SenseHat()
@@ -22,7 +22,7 @@ class Accelerometer(Thread):
         self.que = Queue(1024)
         self.dorun = True
         self.acc_offset = 0
-        self.bin_logger = bin_log
+        self.bin_logger = bin_logger
 
     def run(self):
         print("Calibrating...")
@@ -58,6 +58,7 @@ class Accelerometer(Thread):
             time.sleep(self.period)
 
     def writeBinLog(self, entry):
+        print(self.bin_logger)
         if (self.bin_logger == None):
             return
         else:
