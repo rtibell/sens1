@@ -7,7 +7,7 @@ from BinaryFileController import BinaryFileController
 
 def init():
 
-    bin = BinaryFileController(0.250)
+    bin = BinaryFileController(2)
     bin.start()
 
     acc = Accelerometer(0.250, bin)
@@ -20,7 +20,7 @@ def init():
     dsp.start()
     
     print('at sleep')
-    time.sleep(60*60)
+    time.sleep(60*30)
     
     acc.stopit()
     acc.join()
