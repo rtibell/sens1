@@ -24,7 +24,9 @@ class BinaryFileController(Thread):
                     f.closed
 
     def writeFile(self, file, entry):
-        file.write(entry)
+        file.write(entry['x'])
+        file.write(entry['y'])
+        file.write(entry['z'])
 
     def stopit(self):
         self.dorun = False
