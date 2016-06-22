@@ -3,6 +3,7 @@ import time
 from Accelerometer import Accelerometer
 from Display import Display
 from FileController import FileController
+from BinaryFileController import BinaryFileController
 
 def init():
 
@@ -32,7 +33,7 @@ def init():
     bin.stopit()
     bin.join()
     print("BinLogger stopped")
-       
+
     log.stopit()
     log.join()
     print("FileController stopped")
