@@ -74,6 +74,7 @@ class Accelerometer(Thread):
 
     def read_acc(self):
         a1 = self.Sense.get_accelerometer_raw()
+        self.writeBinLog(a1)
         self.acc = a1
         return a1
 
