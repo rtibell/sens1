@@ -5,7 +5,7 @@ from Display import Display
 from FileController import FileController
 
 def init():
-    acc = Accelerometer(0.250)
+    acc = Accelerometer(0.250, None)
     acc.start()
 
     log = FileController(20)
