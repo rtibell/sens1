@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-from math import pow, sqrt, floor
+from math import pow, sqrt, floor, degrees, atan2, sin, cos, tan
 import sys
 import numpy as np
 import time
@@ -121,11 +121,13 @@ class Accelerometer(Thread):
 
     def mkRotationMTX(self, acc):
         len = self.calc_len(self.acc_bias)
-        Vx = -np.arctan(acc[2]/acc[1]) 
-        Vy = -np.arctan(acc[0]/acc[2])
-        Vz = -np.arctan(acc[1]/acc[0])
+        Vx = -atan2(acc[2], acc[1]) 
+        Vy = -atan2(acc[0], acc[2])
+        Vz = -atan2(acc[1], acc[0])
         print(acc)
         print("Vx={} Vy={} Vz={}".format(Vx,Vy,Vz))
+        print("Vx={} Vy={} Vz={}".format(degrees(Vx),degrees(Vy),degrees(Vz)))
+
 
     def read_acc(self):
         a1 = self.Sense.get_accelerometer_raw()
