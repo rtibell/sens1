@@ -45,7 +45,7 @@ class Accelerometer(Thread):
         #
         # Lambdas
         #
-        self.l_len = lambda x: self.calc_len(x)
+        self.l_len = lambda x: self.calcLen2d(x)
 
     def run(self):
         print("Calibrating...")
@@ -104,9 +104,11 @@ class Accelerometer(Thread):
     def get(self):
         return [self.get_x(), self.get_y(), self.get_z()] 
 
-    def calc_len(self, acc):
+    def calcLen(self, acc):
         return sqrt(pow(acc[0], 2) + pow(acc[1], 2) + pow(acc[2], 2))
 
+    def calcLen2d(self, acc):
+        return sqrt(pow(acc[0], 2) + pow(acc[1], 2))
 
     def adjAcc(self, acc):
         return [acc[0]-self.acc_bias[0], acc[1]-self.acc_bias[1], acc[0]+(Gdelta-self.acc_bias[0])]
@@ -117,7 +119,7 @@ class Accelerometer(Thread):
         
     def getNext(self):
             try:
-                return self.que.get(True, timeout=5)    
+                return self.que.get(True, timeout=15)    
             except:
                 print("Exception")
 
