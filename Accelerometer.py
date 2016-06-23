@@ -63,17 +63,22 @@ class Accelerometer(Thread):
                 i = i - 1
                 time.sleep(self.period)
                 acc_first = self.read_acc()
-            len_list = map(self.l_len, acc_list)    
+            len_list = map(self.l_len, acc_list)
             max = reduce(l_max, len_list)
             min = reduce(l_min, len_list)
             sum = reduce(l_sum, len_list)
+            avg = sum/float(len(acc_list))
+            ruc_len_list = map(lambda x,y: (x+y)/self.period,len_list[1:], len_list[:-1])
+            ruck_max = reduce(l_max, ruc_len_list)
+            ruck_min = reduce(l_min, ruc_len_list)
+            ruck_sum = reduce(l_sum, ruc_len_list)
+            ruck_avg = ruc_sum/float(len(ruc_len_list))
             print(sum)
             ruck_avg = sqrt(pow(acc_list[0][0]-acc_list[-1][0], 2)+pow(acc_list[0][1]-acc_list[-1][1], 2)+pow(acc_list[0][2]-acc_list[-1][2], 2))/self.quantum
-#            ruck_max = sqrt(pow(acc_max['x']-acc_min['x'], 2)+pow(acc_max['y']-acc_min['y'], 2)+pow(acc_max['z']-acc_min['z'], 2))/(abs(acc_min_i-acc_max_i)*self.period)
-            acc_dic = {'avg': (sum/float(len(acc_list))), 'min': min, 'max': max}
-#            ruck_dic = {'avg': ruck_avg, 'max': ruck_max}
-#            self.que.put([dt.datetime.now().strftime('%Y%m%d %H:%M.%S.%f'), 
-#                          acc_dic, ruck_dic, acc_list[0], cc_list[-1]])
+            acc_dic = {'avg': avg, 'min': min, 'max': max}
+            ruck_dic = {'avg': ruck_avg, 'max': ruck_max}
+            self.que.put([dt.datetime.now().strftime('%Y%m%d %H:%M.%S.%f'), 
+                          acc_dic, ruck_dic, acc_list[0], cc_list[-1]])
             
 
     def writeBinLog(self, entry):
