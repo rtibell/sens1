@@ -66,7 +66,7 @@ class Accelerometer(Thread):
                 i = i - 1
                 time.sleep(self.period)
                 acc_first = self.read_acc()
-            len_list = reduce(self.l_len, acc_list)    
+            len_list = map(self.l_len, acc_list)    
             max = reduce(l_max, len_list)
             min = reduce(l_min, len_list)
             sum = reduce(l_sum, len_list)
