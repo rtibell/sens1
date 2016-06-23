@@ -49,7 +49,7 @@ class Accelerometer(Thread):
                 print(acc_first)
                 adj = self.adjAcc([acc_first['x'], acc_first['y'], acc_first['z']])
                 print(adj)
-                acc_list.extend(adj)
+                acc_list.append(adj)
                 print(acc_list)
                 time.sleep
                 acc_first = self.read_acc()
