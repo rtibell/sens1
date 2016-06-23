@@ -65,7 +65,7 @@ class Accelerometer(Thread):
             max = reduce(l_max, acc_list)
             min = reduce(l_min, acc_list)
             sum = reduce(l_sum, acc_list)
-            print(acc_list)
+            print(sum)
             ruck_avg = sqrt(pow(acc_list[0][0]-acc_list[-1][0], 2)+pow(acc_list[0][1]-acc_list[-1][1], 2)+pow(acc_list[0][2]-acc_list[-1][2], 2))/self.quantum
 #            ruck_max = sqrt(pow(acc_max['x']-acc_min['x'], 2)+pow(acc_max['y']-acc_min['y'], 2)+pow(acc_max['z']-acc_min['z'], 2))/(abs(acc_min_i-acc_max_i)*self.period)
             acc_dic = {'avg': (sum/float(len(acc_list))), 'min': min, 'max': max}
