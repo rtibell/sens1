@@ -78,7 +78,7 @@ class Accelerometer(Thread):
             acc_dic = {'avg': avg, 'min': min, 'max': max}
             ruck_dic = {'avg': ruck_avg, 'max': ruck_max}
             self.que.put([dt.datetime.now().strftime('%Y%m%d %H:%M.%S.%f'), 
-                          acc_dic, ruck_dic, acc_list[0], cc_list[-1]])
+                          acc_dic, ruck_dic, acc_list[0], acc_list[-1]])
             
 
     def writeBinLog(self, entry):
