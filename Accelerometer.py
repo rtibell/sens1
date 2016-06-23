@@ -121,9 +121,9 @@ class Accelerometer(Thread):
 
     def mkRotationMTX(self, acc):
         len = self.calc_len(self.acc_bias)
-        Vx = -np.arctan(acc['z']/acc['y']) 
-        Vy = -np.arctan(acc['x']/acc['z'])
-        Vz = -np.arctan(acc['y']/acc['x'])
+        Vx = -np.arctan(acc[2]/acc[1]) 
+        Vy = -np.arctan(acc[0]/acc[2])
+        Vz = -np.arctan(acc[1]/acc[0])
         print("Vx={} Vy={} Vz={}".format(Vx,Vy,Vz))
 
     def read_acc(self):
@@ -145,7 +145,7 @@ class Accelerometer(Thread):
         return self.acc['z']
 
     def calc_len(self, acc):
-        return sqrt(pow(acc['x'], 2) + pow(acc['y'], 2) + pow(acc['z'], 2))
+        return sqrt(pow(acc[0], 2) + pow(acc[1], 2) + pow(acc[2], 2))
 
     def get_len(self):
         self.Length = sqrt(pow(self.get_x(),2) + pow(self.get_y(),2) + pow(self.get_z(),2))
