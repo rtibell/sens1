@@ -9,12 +9,12 @@ from sense_hat import SenseHat
 from threading import Thread
 from multiprocessing import Queue
 
-    #
-    # Lambdas
-    #
-    l_min = lambda x,y: min(x, y)
-    l_max = lambda x,y: max(x, y)
-    l_sum = lambda x,y: x + y
+#
+# Lambdas
+#
+l_min = lambda x,y: min(x, y)
+l_max = lambda x,y: max(x, y)
+l_sum = lambda x,y: x + y
 
 #
 # Constants
