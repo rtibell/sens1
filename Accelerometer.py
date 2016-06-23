@@ -9,6 +9,9 @@ from sense_hat import SenseHat
 from threading import Thread
 from multiprocessing import Queue
 
+Gsto = 9.82436
+Gs = 9.80665
+Gdelta = Gsto/Gs
 IDmtx = [[1, 0, 0],
          [0, 1, 0],
          [0, 0, 1]]
@@ -33,7 +36,7 @@ class Accelerometer(Thread):
     def run(self):
         print("Calibrating...")
         self.adjust()
-        print("Calibration done!")
+        print("Calibration done! adjust={}".format(self.acc_bias))
         while (self.dorun):
             i = self.iters
             max = -1000000000.0
@@ -114,20 +117,11 @@ class Accelerometer(Thread):
             z += rd['z']
             av = self.get_len()
             ac += av
+            time.sleep(0.001)
         self.acc_offset = ac/100.0
         self.acc_offset *= 1.02
         self.acc_bias = [x/100.0, y/100.0, z/100.0]
-        self.Rmtx = self.mkRotationMTX(self.acc_bias)
-
-    def mkRotationMTX(self, acc):
-        len = self.calc_len(self.acc_bias)
-        Vx = -atan2(acc[2], acc[1]) 
-        Vy = -atan2(acc[0], acc[2])
-        Vz = -atan2(acc[1], acc[0])
-        print(acc)
-        print("Vx={} Vy={} Vz={}".format(Vx,Vy,Vz))
-        print("Vx={} Vy={} Vz={}".format(degrees(Vx),degrees(Vy),degrees(Vz)))
-
+        
 
     def read_acc(self):
         a1 = self.Sense.get_accelerometer_raw()
@@ -156,6 +150,9 @@ class Accelerometer(Thread):
 
     def get_adj_len(self):
         return self.get_len()-self.acc_offset
+
+    def adjAcc(self, acc):
+        return [acc[0]-self.acc_bias[0], acc[1]-self.acc_bias[1], acc[0]+(Gdelta-self.acc_bias[0])]
 
     def report(self):
         print(self.get_x())
