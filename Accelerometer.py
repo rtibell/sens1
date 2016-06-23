@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-from math import pow, sqrt, floor
+from math import pow, sqrt, floor, 
 import sys
 import numpy as np
 import time
@@ -8,6 +8,10 @@ import datetime as dt
 from sense_hat import SenseHat
 from threading import Thread
 from multiprocessing import Queue
+
+IDmtx = [[1, 0, 0],
+         [0, 1, 0],
+         [0, 0, 1]]
 
 class Accelerometer(Thread):
     def __init__(self, quantum, bin_logger):
@@ -22,9 +26,44 @@ class Accelerometer(Thread):
         self.que = Queue(1024)
         self.dorun = True
         self.acc_offset = 0
+        self.acc_bias = [0.0, 0.0, 0.0]
+        self.Rmtx = IDmtx
         self.bin_logger = bin_logger
 
     def run(self):
+        print("Calibrating...")
+        self.adjust()
+        print("Calibration done!")
+        while (self.dorun):
+            i = self.iters
+            max = -1000000000.0
+            min = 1000000000.0
+            sum = 0.0
+            acc_first = self.read_acc()
+            while (i > 0):
+                rd = self.read_acc()
+                av = self.get_adj_len()
+                sum = sum + av
+                if (max < av):
+                    max = av
+                    acc_max = rd
+                    acc_max_i = (self.iters - i)
+                if (min > av):
+                    min = av
+                    acc_min = rd 
+                    acc_min_i = (self.iters - i)
+                i = i - 1
+                time.sleep
+            acc_last = self.read_acc()
+            ruck_avg = sqrt(pow(acc_first['x']-acc_last['x'], 2)+pow(acc_first['y']-acc_last['y'], 2)+pow(acc_first['z']-acc_last['z'], 2))/self.quantum
+            ruck_max = sqrt(pow(acc_max['x']-acc_min['x'], 2)+pow(acc_max['y']-acc_min['y'], 2)+pow(acc_max['z']-acc_min['z'], 2))/(abs(acc_min_i-acc_max_i)*self.period)
+            acc_dic = {'avg': (sum/float(self.iters)), 'min': min, 'max': max}
+            ruck_dic = {'avg': ruck_avg, 'max': ruck_max}
+            self.que.put([dt.datetime.now().strftime('%Y%m%d %H:%M.%S.%f'), 
+                          acc_dic, ruck_dic, acc_first, acc_last])
+            time.sleep(self.period)
+
+    def old_run(self):
         print("Calibrating...")
         self.adjust()
         print("Calibration done!")
@@ -65,12 +104,27 @@ class Accelerometer(Thread):
 
     def adjust(self):
         ac = 0.0
+        x = 0.0
+        y = 0.0
+        z = 0.0
         for i in range(0,100):
             rd = self.read_acc()
+            x += rd['x']
+            y += rd['y']
+            z += rd['z']
             av = self.get_len()
             ac += av
         self.acc_offset = ac/100.0
         self.acc_offset *= 1.02
+        self.acc_bias = [x/100.0, y/100.0, z/100.0]
+        self.Rmtx = self.mkRotationMTX(self.acc_bias)
+
+    def mkRotationMTX(self, acc):
+        len = self.calc_len(self.acc_bias)
+        Vx = -np.arctan(acc['z']/acc['y']) 
+        Vy = -np.arctan(acc['x']/acc['z'])
+        Vz = -np.arctan(acc['y']/acc['x'])
+        print("Vx={} Vy={} Vz={}".format(Vx,Vy,Vz))
 
     def read_acc(self):
         a1 = self.Sense.get_accelerometer_raw()
@@ -89,6 +143,9 @@ class Accelerometer(Thread):
 
     def get_z(self):
         return self.acc['z']
+
+    def calc_len(self, acc):
+        return sqrt(pow(acc['x'], 2) + pow(acc['y'], 2) + pow(acc['z'], 2))
 
     def get_len(self):
         self.Length = sqrt(pow(self.get_x(),2) + pow(self.get_y(),2) + pow(self.get_z(),2))
