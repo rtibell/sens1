@@ -12,9 +12,9 @@ from multiprocessing import Queue
 #
 # Lambdas
 #
-l_min = lambda x,y: min(x,y)
-l_max = lambda x,y: max(x,y)
-l_sum = lambda x,y: x+y
+l_min = lambda x,y: min(self.calc_len(x),self.calc_len(y))
+l_max = lambda x,y: max(self.calc_len(x),self.calc_len(y))
+l_sum = lambda x,y: self.calc_len(x) + self.calc_len(y)
 
 #
 # Constants
