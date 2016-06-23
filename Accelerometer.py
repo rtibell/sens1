@@ -37,15 +37,20 @@ class Accelerometer(Thread):
         print("Calibrating...")
         self.adjust()
         print("Calibration done! adjust={}".format(self.acc_bias))
-        print(self.adjAcc(self.acc_bias))
-        print(Gdelta)
+
+        acc_first = self.read_acc()
         while (self.dorun):
             i = self.iters
             max = -1000000000.0
             min = 1000000000.0
             sum = 0.0
-            acc_first = self.read_acc()
+            acc_list = []
             while (i > 0):
+                acc_list.extend(self.adjAcc([acc_first['x'], acc_first['y'], acc_first['z']]))
+                time.sleep
+                acc_first = self.read_acc()
+            print(acc_list)
+                return
                 rd = self.read_acc()
                 av = self.get_adj_len()
                 sum = sum + av
