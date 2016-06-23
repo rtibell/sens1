@@ -20,13 +20,6 @@ IDmtx = [[1, 0, 0],
          [0, 0, 1]]
 
 class Accelerometer(Thread):
-    #
-    # Lambdas
-    #
-    self.l_min = lambda x,y: min(self.calc_len(x),self.calc_len(y))
-    self.l_max = lambda x,y: max(self.calc_len(x),self.calc_len(y))
-    self.l_sum = lambda x,y: self.calc_len(x) + self.calc_len(y)
-
 
     def __init__(self, quantum, bin_logger):
         Thread.__init__(self)
@@ -42,6 +35,13 @@ class Accelerometer(Thread):
         self.acc_bias = [0.0, 0.0, 0.0]
         self.Rmtx = IDmtx
         self.bin_logger = bin_logger
+        #
+        # Lambdas
+        #
+        self.l_min = lambda x,y: min(self.calc_len(x),self.calc_len(y))
+        self.l_max = lambda x,y: max(self.calc_len(x),self.calc_len(y))
+        self.l_sum = lambda x,y: self.calc_len(x) + self.calc_len(y)
+
 
     def run(self):
         print("Calibrating...")
