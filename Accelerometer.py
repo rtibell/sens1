@@ -38,6 +38,7 @@ class Accelerometer(Thread):
         self.adjust()
         print("Calibration done! adjust={}".format(self.acc_bias))
         print(self.adjAcc(self.acc_bias))
+        print(Gdelta)
         while (self.dorun):
             i = self.iters
             max = -1000000000.0
@@ -153,7 +154,7 @@ class Accelerometer(Thread):
         return self.get_len()-self.acc_offset
 
     def adjAcc(self, acc):
-        return [acc[0]-self.acc_bias[0], acc[1]-self.acc_bias[1], acc[0]+(-Gdelta+self.acc_bias[0])]
+        return [acc[0]-self.acc_bias[0], acc[1]-self.acc_bias[1], acc[0]+(Gdelta-self.acc_bias[0])]
 
     def report(self):
         print(self.get_x())
