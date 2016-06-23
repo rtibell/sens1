@@ -10,13 +10,6 @@ from threading import Thread
 from multiprocessing import Queue
 
 #
-# Lambdas
-#
-l_min = lambda x,y: min(self.calc_len(x),self.calc_len(y))
-l_max = lambda x,y: max(self.calc_len(x),self.calc_len(y))
-l_sum = lambda x,y: self.calc_len(x) + self.calc_len(y)
-
-#
 # Constants
 #
 Gsto = 9.82436
@@ -27,6 +20,14 @@ IDmtx = [[1, 0, 0],
          [0, 0, 1]]
 
 class Accelerometer(Thread):
+    #
+    # Lambdas
+    #
+    l_min = lambda x,y: min(self.calc_len(x),self.calc_len(y))
+    l_max = lambda x,y: max(self.calc_len(x),self.calc_len(y))
+    l_sum = lambda x,y: self.calc_len(x) + self.calc_len(y)
+
+    
     def __init__(self, quantum, bin_logger):
         Thread.__init__(self)
         self.daemon = True
