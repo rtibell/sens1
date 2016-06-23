@@ -58,7 +58,7 @@ class Accelerometer(Thread):
             sum = 0.0
             acc_list = []
             while (i > 0):
-                adj = self.adjAcc([acc_first['x'], acc_first['y'], acc_first['z']])
+                adj = self.adjAcc(acc_first)
                 acc_list.append(adj)
                 i = i - 1
                 time.sleep(self.period)
@@ -89,9 +89,9 @@ class Accelerometer(Thread):
         z = 0.0
         for i in range(0,100):
             rd = self.read_acc()
-            x += rd['x']
-            y += rd['y']
-            z += rd['z']
+            x += rd[0]
+            y += rd[1]
+            z += rd[2]
             time.sleep(0.001)
         self.acc_bias = [x/100.0, y/100.0, z/100.0]
         
@@ -99,7 +99,7 @@ class Accelerometer(Thread):
     def read_acc(self):
         a1 = self.Sense.get_accelerometer_raw()
         self.writeBinLog(a1)
-        return a1
+        return [a1['x'], a1['y'], a1['z']]
 
     def get(self):
         return [self.get_x(), self.get_y(), self.get_z()] 
