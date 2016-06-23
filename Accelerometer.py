@@ -9,6 +9,13 @@ from sense_hat import SenseHat
 from threading import Thread
 from multiprocessing import Queue
 
+    #
+    # Lambdas
+    #
+    l_min = lambda x,y: min(x, y)
+    l_max = lambda x,y: max(x, y)
+    l_sum = lambda x,y: x + y
+
 #
 # Constants
 #
@@ -38,10 +45,7 @@ class Accelerometer(Thread):
         #
         # Lambdas
         #
-        self.l_min = lambda x,y: min(self.calc_len(x),self.calc_len(y))
-        self.l_max = lambda x,y: max(self.calc_len(x),self.calc_len(y))
-        self.l_sum = lambda x,y: self.calc_len(x) + self.calc_len(y)
-
+        self.l_len = lambda x: self.calc_len(x)
 
     def run(self):
         print("Calibrating...")
@@ -62,9 +66,10 @@ class Accelerometer(Thread):
                 i = i - 1
                 time.sleep(self.period)
                 acc_first = self.read_acc()
-            max = reduce(self.l_max, acc_list)
-            min = reduce(self.l_min, acc_list)
-            sum = reduce(self.l_sum, acc_list)
+            len_list = reduce(self.l_len, acc_list)    
+            max = reduce(l_max, len_list)
+            min = reduce(l_min, len_list)
+            sum = reduce(l_sum, len_list)
             print(sum)
             ruck_avg = sqrt(pow(acc_list[0][0]-acc_list[-1][0], 2)+pow(acc_list[0][1]-acc_list[-1][1], 2)+pow(acc_list[0][2]-acc_list[-1][2], 2))/self.quantum
 #            ruck_max = sqrt(pow(acc_max['x']-acc_min['x'], 2)+pow(acc_max['y']-acc_min['y'], 2)+pow(acc_max['z']-acc_min['z'], 2))/(abs(acc_min_i-acc_max_i)*self.period)
