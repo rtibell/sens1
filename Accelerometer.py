@@ -23,9 +23,9 @@ class Accelerometer(Thread):
     #
     # Lambdas
     #
-    l_min = lambda x,y: min(self.calc_len(x),self.calc_len(y))
-    l_max = lambda x,y: max(self.calc_len(x),self.calc_len(y))
-    l_sum = lambda x,y: self.calc_len(x) + self.calc_len(y)
+    self.l_min = lambda x,y: min(self.calc_len(x),self.calc_len(y))
+    self.l_max = lambda x,y: max(self.calc_len(x),self.calc_len(y))
+    self.l_sum = lambda x,y: self.calc_len(x) + self.calc_len(y)
 
 
     def __init__(self, quantum, bin_logger):
