@@ -60,9 +60,7 @@ class Accelerometer(Thread):
             while (i > 0):
                 print(acc_first)
                 adj = self.adjAcc([acc_first['x'], acc_first['y'], acc_first['z']])
-                print(adj)
                 acc_list.append(adj)
-                print(acc_list)
                 i = i - 1
                 time.sleep(self.period)
                 acc_first = self.read_acc()
@@ -108,8 +106,6 @@ class Accelerometer(Thread):
         return [self.get_x(), self.get_y(), self.get_z()] 
 
     def calc_len(self, acc):
-        print('acc')
-        print(acc)
         return sqrt(pow(acc[0], 2) + pow(acc[1], 2) + pow(acc[2], 2))
 
 
