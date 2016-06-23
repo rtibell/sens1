@@ -124,6 +124,7 @@ class Accelerometer(Thread):
         Vx = -np.arctan(acc[2]/acc[1]) 
         Vy = -np.arctan(acc[0]/acc[2])
         Vz = -np.arctan(acc[1]/acc[0])
+        print(acc)
         print("Vx={} Vy={} Vz={}".format(Vx,Vy,Vz))
 
     def read_acc(self):
