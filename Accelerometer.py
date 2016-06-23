@@ -50,25 +50,25 @@ class Accelerometer(Thread):
                 time.sleep
                 acc_first = self.read_acc()
             print(acc_list)
-                return
-                rd = self.read_acc()
-                av = self.get_adj_len()
-                sum = sum + av
-                if (max < av):
-                    max = av
-                    acc_max = rd
-                    acc_max_i = (self.iters - i)
-                if (min > av):
-                    min = av
-                    acc_min = rd 
-                    acc_min_i = (self.iters - i)
-                i = i - 1
-                time.sleep
-            acc_last = self.read_acc()
-            ruck_avg = sqrt(pow(acc_first['x']-acc_last['x'], 2)+pow(acc_first['y']-acc_last['y'], 2)+pow(acc_first['z']-acc_last['z'], 2))/self.quantum
-            ruck_max = sqrt(pow(acc_max['x']-acc_min['x'], 2)+pow(acc_max['y']-acc_min['y'], 2)+pow(acc_max['z']-acc_min['z'], 2))/(abs(acc_min_i-acc_max_i)*self.period)
-            acc_dic = {'avg': (sum/float(self.iters)), 'min': min, 'max': max}
-            ruck_dic = {'avg': ruck_avg, 'max': ruck_max}
+            return
+#                rd = self.read_acc()
+#                av = self.get_adj_len()
+#                sum = sum + av
+#                if (max < av):
+#                    max = av
+#                    acc_max = rd
+#                    acc_max_i = (self.iters - i)
+#                if (min > av):
+#                    min = av
+#                    acc_min = rd 
+#                    acc_min_i = (self.iters - i)
+#                i = i - 1
+#                time.sleep
+#            acc_last = self.read_acc()
+#            ruck_avg = sqrt(pow(acc_first['x']-acc_last['x'], 2)+pow(acc_first['y']-acc_last['y'], 2)+pow(acc_first['z']-acc_last['z'], 2))/self.quantum
+#            ruck_max = sqrt(pow(acc_max['x']-acc_min['x'], 2)+pow(acc_max['y']-acc_min['y'], 2)+pow(acc_max['z']-acc_min['z'], 2))/(abs(acc_min_i-acc_max_i)*self.period)
+#            acc_dic = {'avg': (sum/float(self.iters)), 'min': min, 'max': max}
+#            ruck_dic = {'avg': ruck_avg, 'max': ruck_max}
             self.que.put([dt.datetime.now().strftime('%Y%m%d %H:%M.%S.%f'), 
                           acc_dic, ruck_dic, acc_first, acc_last])
             time.sleep(self.period)
