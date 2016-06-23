@@ -103,6 +103,8 @@ class Accelerometer(Thread):
         return [self.get_x(), self.get_y(), self.get_z()] 
 
     def calc_len(self, acc):
+        print('acc')
+        print(acc)
         return sqrt(pow(acc[0], 2) + pow(acc[1], 2) + pow(acc[2], 2))
 
 
