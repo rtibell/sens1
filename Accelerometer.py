@@ -46,7 +46,11 @@ class Accelerometer(Thread):
             sum = 0.0
             acc_list = []
             while (i > 0):
-                acc_list.extend(self.adjAcc([acc_first['x'], acc_first['y'], acc_first['z']]))
+                print(acc_first)
+                adj = self.adjAcc([acc_first['x'], acc_first['y'], acc_first['z']])
+                print(adj)
+                acc_list.extend(adj)
+                print(acc_list)
                 time.sleep
                 acc_first = self.read_acc()
             print(acc_list)
