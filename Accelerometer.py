@@ -51,7 +51,7 @@ class Accelerometer(Thread):
         print("Calibrating...")
         self.adjust()
         print("Calibration done! adjust={}".format(self.acc_bias))
-
+        print("quantum={} period={} iters={}".format(self.quantum, self.period, self.iters))
         acc_first = self.read_acc()
         while (self.dorun):
             i = self.iters
