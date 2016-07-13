@@ -92,7 +92,8 @@ class Display(Thread):
             else:
                 if (next[1]['avg'] > 0.0):
                     self.rpt(next)
-                    self.log.putNext(next)
+                    if (self.log != None):
+                        self.log.putNext(next)
                 acc_max = next[1]['max']
                 ruck = next[2]['max']
                 self.shiftL()
