@@ -4,7 +4,7 @@ from multiprocessing import Queue
 from threading import Thread
 import math
 
-BUFF_SIZE = 50
+BUFF_SIZE = 100
 buffer = [None] * BUFF_SIZE
 idx = 0
 global buffer, idx
@@ -43,19 +43,23 @@ class HelloWorld:
         retbuff = buffer[idx:-1] + buffer[0:idx] 
         #print(retbuff)
         labels = map(lambda x: x[0][9:], retbuff)
-        series = ["Acc max", "Acc avg", "Acc min"]
-        datamax = map(lambda x: x[1]['max'], retbuff)
-        dataavg = map(lambda x: x[1]['avg'], retbuff)
-        datamin = map(lambda x: x[1]['min'], retbuff)
-        print(" max={}\n avg={}\n min={}".format(datamax, dataavg, datamin))
-        #return json.dumps({"labels": ["January", "February", "March", "April", "May", "June", "July"],
-        #        "series": ["Series A", "Series B"],
-        #        "data": [[65, 18, 80, 81, 56, 55, 40],
-        #                 [28, 29, 40, 19, 86, 27, 90]]})
-        return json.dumps({"labels": labels,
-                "series": series,
-                "data": [datamax,
-                         dataavg,
-                         datamin]})
-
-
+        acc_series = ["Acc max", "Acc avg", "Acc min"]
+        acc_datamax = map(lambda x: x[1]['max'], retbuff)
+        acc_dataavg = map(lambda x: x[1]['avg'], retbuff)
+        acc_datamin = map(lambda x: x[1]['min'], retbuff)
+        ruck_series = ["Ruck max", "Ruck avg"]
+        ruck_datamax = map(lambda x: x[2]['max'], retbuff)
+        ruck_dataavg = map(lambda x: x[2]['avg'], retbuff)
+        return json.dumps({"Acc": 
+                                {"labels": labels,
+                                  "series": acc_series,
+                                  "data": [acc_datamax,
+                                           acc_dataavg,
+                                           acc_datamin]},
+                           "Ruck":
+                          
+                                {"labels": labels,
+                                 "series": ruck_series,
+                                 "data": [ruck_datamax,
+                                          ruck_dataavg]}
+                           })
