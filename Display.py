@@ -105,7 +105,8 @@ class Display(Thread):
                 
         
     def rpt(self, next):
-        print('{} {}'.format(dt.datetime.now(), next))
+        #print('{} {}'.format(dt.datetime.now(), next))
+        print('{}'.format(next))
         
     def stopit(self):
         self.dorun = False
