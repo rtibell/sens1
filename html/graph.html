@@ -1,0 +1,32 @@
+<html>
+<head>
+<title>Chart page</title>
+</head>
+<body ng-app="app">
+<h3>Chart</h3>
+<canvas class="chart chart-line" chart-data="data" chart-labels="labels" 
+    chart-series="series" chart-click="onClick"></canvas> 
+    
+<br/>
+<div class="container"></div>
+<div id="container" class="container">
+  <div class="row" ng-controller="LineCtrl">
+    <div class="col-lg-6 col-sm-12">
+      <div class="panel panel-default">
+        <div class="panel-heading">Stacked Bar Chart</div>
+        <div class="panel-body">
+          <canvas width="600" height="300" 
+                  class="chart chart-line" chart-data="data" chart-labels="labels"
+                  chart-options="options" chart-series="series"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <script src="node_modules/angular/angular.min.js"></script> 
+  <script src="node_modules/chart.js/dist/Chart.min.js"></script> 
+  <script src="node_modules/angular-chart.js/dist/angular-chart.min.js"></script> 
+  <script src="chart.js"></script> 
+</body>
+</html>

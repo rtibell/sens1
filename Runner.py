@@ -8,12 +8,15 @@ from REST import RESTThread
 
 USE_BINLOG = False
 USE_TEXTLOG = False
+USE_REST = True
 
 
 def init():
-    print('Start REST server')
-    rest = RESTThread()
-    rest.start()
+    rest = None
+    if (USE_REST):
+        print('Start REST server')
+        rest = RESTThread()
+        rest.start()
     
     bin = None
     if (USE_BINLOG):
@@ -28,7 +31,7 @@ def init():
         log = FileController(20)
         log.start()
 
-    dsp = Display(acc, log)
+    dsp = Display(acc, log, rest)
     dsp.start()
     
     print('at sleep')
@@ -50,11 +53,12 @@ def init():
     if (USE_TEXTLOG):
         log.stopit()
         log.join()
-    print("FileController stopped")
+        print("FileController stopped")
 
-    rest.stopit()
-    rest.join()
-    print("REST server stopped")
+    if (USE_REST):
+        rest.stopit()
+        rest.join()
+        print("REST server stopped")
 
     time.sleep(2)
     print("End")

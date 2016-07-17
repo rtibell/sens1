@@ -27,11 +27,12 @@ INIT_DSP = [
             E,E,E,Y,Y,E,E,E]
 
 class Display(Thread):
-    def __init__(self, prod, log):
+    def __init__(self, prod, log, rest):
         Thread.__init__(self)
         self.daemon = True
         self.prod = prod
         self.log = log
+        self.rest = rest
         self.dorun = True
         self.Sense = SenseHat()
         self.Sense.clear()
@@ -94,6 +95,8 @@ class Display(Thread):
                     self.rpt(next)
                     if (self.log != None):
                         self.log.putNext(next)
+                    if (self.rest != None):
+                        self.rest.putNext(next)
                 acc_max = next[1]['max']
                 ruck = next[2]['max']
                 self.shiftL()
