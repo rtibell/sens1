@@ -69,6 +69,7 @@ class Accelerometer(Thread):
             sum = reduce(l_sum, acc_len_list)
             avg = sum/float(len(acc_list))
             ruc_len_list = map(lambda x,y: (x+y)/self.period,acc_len_list[1:], acc_len_list[:-1])
+            print(ruc_len_list)
             ruck_max = reduce(l_max, ruc_len_list)
             ruck_min = reduce(l_min, ruc_len_list)
             ruck_sum = reduce(l_sum, ruc_len_list)
