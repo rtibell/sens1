@@ -38,7 +38,7 @@ angular.module("app", ["chart.js"])
         error(function(data, status, headers, config) {
             // log error
         });
-  }, 1000);
+  }, 5000);
 }])
   .controller("LineCtrl2", ['$scope', '$http', '$timeout', '$interval', function ($scope, $http, $timeout, $interval) {
     $http.get('http://192.168.0.19:80/rest').
@@ -64,5 +64,31 @@ angular.module("app", ["chart.js"])
         error(function(data, status, headers, config) {
             // log error
         });
-  }, 1000);
+  }, 5000);
+}])
+  .controller("LineCtrl3", ['$scope', '$http', '$timeout', '$interval', function ($scope, $http, $timeout, $interval) {
+    $http.get('http://192.168.0.19:80/rest').
+        success(function(data, status, headers, config) {
+            $scope.data = data.SDEV.data;
+            $scope.labels = data.SDEV.labels;
+            $scope.series = data.SDEV.series;
+        }).
+        error(function(data, status, headers, config) {
+            // log error
+        });
+
+  
+  
+  // Simulate async data update 
+  $interval(function () {
+    $http.get('http://192.168.0.19:80/rest').
+        success(function(data, status, headers, config) {
+            $scope.data = data.SDEV.data;
+            $scope.labels = data.SDEV.labels;
+            $scope.series = data.SDEV.series;
+        }).
+        error(function(data, status, headers, config) {
+            // log error
+        });
+  }, 5000);
 }]);

@@ -5,10 +5,11 @@
 <body ng-app="app">
 <br/>
 <div id="container" class="container">
+
   <div class="row" ng-controller="LineCtrl1">
     <div class="col-lg-6 col-sm-12">
       <div class="panel panel-default">
-        <div class="panel-heading">Stacked Bar Chart</div>
+        <div class="panel-heading">Acceleration Chart</div>
         <div class="panel-body">
           <canvas width="600" height="300" 
                   class="chart chart-line" chart-data="data" chart-labels="labels"
@@ -21,7 +22,7 @@
   <div class="row" ng-controller="LineCtrl2">
     <div class="col-lg-6 col-sm-12">
       <div class="panel panel-default">
-        <div class="panel-heading">Stacked Bar Chart</div>
+        <div class="panel-heading">Ruck Chart</div>
         <div class="panel-body">
           <canvas width="600" height="300" 
                   class="chart chart-line" chart-data="data" chart-labels="labels"
@@ -29,7 +30,20 @@
         </div>
       </div>
     </div>
-  </div>  
+  </div> 
+  
+  <div class="row" ng-controller="LineCtrl3">
+    <div class="col-lg-6 col-sm-12">
+      <div class="panel panel-default">
+        <div class="panel-heading">Standard deviation Chart</div>
+        <div class="panel-body">
+          <canvas width="600" height="300" 
+                  class="chart chart-line" chart-data="data" chart-labels="labels"
+                  chart-options="options" chart-series="series"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>    
 </div>
 
   <script src="node_modules/angular/angular.min.js"></script> 

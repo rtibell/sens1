@@ -68,16 +68,16 @@ class Accelerometer(Thread):
             min = reduce(l_min, acc_len_list)
             sum = reduce(l_sum, acc_len_list)
             avg = sum/float(len(acc_list))
-            ruc_len_list = map(lambda x,y: (x+y)/self.period,acc_len_list[1:], acc_len_list[:-1])
-            print(ruc_len_list)
+            sdev = sqrt(reduce(lambda x,y: x+pow((y-avg), 2.0), acc_len_list, 0)/(len(acc_list)-1.0))
+            ruc_len_list = map(lambda x,y: (x-y)/self.period,acc_len_list[1:], acc_len_list[:-1])
             ruck_max = reduce(l_max, ruc_len_list)
             ruck_min = reduce(l_min, ruc_len_list)
             ruck_sum = reduce(l_sum, ruc_len_list)
             ruck_avg = ruck_sum/float(len(ruc_len_list))
-            #print(sum)
-            ruck_avg = sqrt(pow(acc_list[0][0]-acc_list[-1][0], 2)+pow(acc_list[0][1]-acc_list[-1][1], 2)+pow(acc_list[0][2]-acc_list[-1][2], 2))/self.quantum
-            acc_dic = {'avg': avg, 'min': min, 'max': max}
-            ruck_dic = {'avg': ruck_avg, 'max': ruck_max}
+            ruck_sdev = sdev = sqrt(reduce(lambda x,y: x+pow((y-ruck_avg), 2.0), ruc_len_list, 0)/(len(ruc_len_list)-1.0))
+            ruck_tot_avg = sqrt(pow(acc_list[0][0]-acc_list[-1][0], 2)+pow(acc_list[0][1]-acc_list[-1][1], 2)+pow(acc_list[0][2]-acc_list[-1][2], 2))/self.quantum
+            acc_dic = {'avg': avg, 'min': min, 'max': max, 'sdev': sdev}
+            ruck_dic = {'avg': ruck_avg, 'min': ruck_min, 'max': ruck_max, 'sdev': ruck_sdev, 'tot_avg': ruck_tot_avg}
             self.que.put([dt.datetime.now().strftime('%Y%m%d %H:%M.%S.%f'), 
                           acc_dic, ruck_dic, acc_list[0], acc_list[-1]])
             

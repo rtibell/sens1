@@ -47,9 +47,13 @@ class HelloWorld:
         acc_datamax = map(lambda x: x[1]['max'], retbuff)
         acc_dataavg = map(lambda x: x[1]['avg'], retbuff)
         acc_datamin = map(lambda x: x[1]['min'], retbuff)
-        ruck_series = ["Ruck max", "Ruck avg"]
+        ruck_series = ["Ruck max", "Ruck avg", "Ruck min"]
         ruck_datamax = map(lambda x: x[2]['max'], retbuff)
         ruck_dataavg = map(lambda x: x[2]['avg'], retbuff)
+        ruck_datamin = map(lambda x: x[2]['min'], retbuff)
+        sdev_series = ["Acc sdev", "Ruck sdev"]
+        acc_sdev = map(lambda x: x[1]['sdev'], retbuff)
+        ruck_sdev = map(lambda x: x[2]['sdev'], retbuff)
         return json.dumps({"Acc": 
                                 {"labels": labels,
                                   "series": acc_series,
@@ -61,5 +65,11 @@ class HelloWorld:
                                 {"labels": labels,
                                  "series": ruck_series,
                                  "data": [ruck_datamax,
-                                          ruck_dataavg]}
+                                          ruck_dataavg,
+                                          ruck_datamin]},
+                           "SDEV":
+                                {"labels": labels,
+                                 "series": sdev_series,
+                                 "data": [acc_sdev,
+                                          ruck_sdev]}
                            })
