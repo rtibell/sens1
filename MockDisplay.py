@@ -1,4 +1,4 @@
-from sense_hat import SenseHat
+
 from threading import Thread
 from multiprocessing import Queue
 import datetime as dt
@@ -26,19 +26,17 @@ INIT_DSP = [
             E,E,Y,G,G,Y,E,E,
             E,E,E,Y,Y,E,E,E]
 
-class Display(Thread):
-    def __init__(self, prod, log, rest):
+class MockDisplay(Thread):
+    def __init__(self, prod, log, rest, iot):
         Thread.__init__(self)
         self.daemon = True
         self.prod = prod
         self.log = log
         self.rest = rest
+        self.iot = iot
         self.dorun = True
-        self.Sense = SenseHat()
-        self.Sense.clear()
         self.DSPbuff = INIT_DSP
         self.color_scale = self.colorScale(RUCK_SCALE)
-        self.Sense.low_light = True
     
     def colorScale(self, size):
         buff = [None] * 64
@@ -47,7 +45,8 @@ class Display(Thread):
         return buff
     
     def dsp(self):
-        self.Sense.set_pixels(self.DSPbuff)
+        #print(self.DSPbuff)
+        a=1
         
     def scaleAcc(self, value):
         v = value*8/0.5
@@ -97,6 +96,8 @@ class Display(Thread):
                         self.log.putNext(next)
                     if (self.rest != None):
                         self.rest.putNext(next)
+                    if (self.iot != None):
+                        self.iot.putNext(next)
                 acc_max = next[1]['max']
                 ruck = next[2]['max']
                 self.shiftL()
@@ -106,8 +107,9 @@ class Display(Thread):
         
     def rpt(self, next):
         #print('{} {}'.format(dt.datetime.now(), next))
-        ##RT-dbg#print('{}'.format(next))
-        i=1
+        #print('rpt {}'.format(next))
+        a1=1
+        
         
     def stopit(self):
         self.dorun = False

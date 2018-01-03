@@ -32,7 +32,7 @@ class RESTThread(Thread):
         global buffer, idx
         buffer[idx] = entry
         idx = (idx+1) % BUFF_SIZE
-        print(idx)
+        #print(idx)
         
     
     
@@ -41,7 +41,7 @@ class HelloWorld:
     def GET(self):
         global buffer, idx
         retbuff = buffer[idx:-1] + buffer[0:idx] 
-        #print(retbuff)
+        print(retbuff)
         labels = map(lambda x: x[0][9:], retbuff)
         acc_series = ["Acc max", "Acc avg", "Acc min"]
         acc_datamax = map(lambda x: x[1]['max'], retbuff)

@@ -1,16 +1,16 @@
 
 import time
-from Accelerometer import Accelerometer
-from Display import Display
+from MockAccelerometer import MockAccelerometer
+from MockDisplay import MockDisplay
 from FileController import FileController
 from BinaryFileController import BinaryFileController
 from AWSIOTController import AWSIOTController
 from REST import RESTThread
 
-USE_BINLOG = True
-USE_TEXTLOG = True
+USE_BINLOG = False
+USE_TEXTLOG = False
 USE_REST = False
-USE_IOT = False
+USE_IOT = True
 
 
 def init():
@@ -22,23 +22,27 @@ def init():
     
     bin = None
     if (USE_BINLOG):
+        print('Start BinLogg server')
         bin = BinaryFileController(2)
         bin.start()
 
-    acc = Accelerometer(0.250, bin)
+    acc = MockAccelerometer(0.250, bin)
     acc.start()
 
     log = None
     if (USE_TEXTLOG):
+        print('Start TextLogg server')
         log = FileController(20)
         log.start()
 
     iot = None
     if (USE_IOT):
-        iot = AWSIOTController(15)
+        print('Start IOT server')
+        iot = AWSIOTController(5)
         iot.start()
 
-    dsp = Display(acc, log, rest)
+    print('Start MockDisplay')
+    dsp = MockDisplay(acc, log, rest, iot)
     dsp.start()
     
     print('at sleep')
